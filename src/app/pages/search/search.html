@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search</title>
+
+    <link rel="stylesheet" href="./../../css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="./../../css/general.css" type="text/css" />
+    <link rel="stylesheet" href="./../../css/fonts.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="./../../css/daterangepicker.css"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="./../../css/search/page.css" type="text/css" />
+
+    <script src="./../../js/jquery-3.6.0.min.js"></script>
+    <script src="./../../js/bootstrap.bundle.js"></script>
+    <script src="./../../js/moment.min.js"></script>
+    <script src="./../../js/daterangepicker.min.js"></script>
+  </head>
+  <body class="d-flex">
+    <aside class="d-flex flex-column">
+      <div class="menu-logo d-flex align-items-center justify-content-center">
+        <img src="./../../img/menu/menu-logo.png" />
+      </div>
+      <nav class="menu">
+        <ul class="nav flex-column">
+          <li
+            class="nav-item active search"
+            onclick="location.href='../search/search.html'"
+          >
+            <img src="./../../img/menu/search.png" />
+          </li>
+
+          <li
+            class="nav-item profile"
+            onclick="location.href='../profile/profile.html'"
+          >
+            <img src="./../../img/menu/profile.png" />
+          </li>
+
+          <li class="nav-item mail">
+            <img src="./../../img/menu/mail.png" />
+          </li>
+
+          <li class="nav-item calendar">
+            <img src="./../../img/menu/calendar.png" />
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <div class="d-flex flex-fill flex-column">
+      <header class="m-0 row justify-content-center">
+        <div class="page-history col d-flex align-items-center">
+          <span>Home</span>
+          <img src="../../img/chevron.png" class="align-middle" />
+          <span>Search</span>
+          <img src="../../img/chevron.png" class="align-middle" />
+          <span>Results</span>
+        </div>
+        <div
+          class="login-user col-3 d-flex justify-content-end align-items-center"
+        >
+          <select>
+            <optgroup>
+              <option>Faruh Bernandez</option>
+            </optgroup>
+            <optgroup>
+              <option>Logout</option>
+            </optgroup>
+          </select>
+        </div>
+      </header>
+      <section
+        class="d-flex flex-fill flex-column align-items-center justify-content-center"
+      >
+        <article>
+          <div class="row h-100">
+            <div class="col filter-panel">
+              <div class="form-group mb-4">
+                <label for="locationSelect" class="text-uppercase mb-1"
+                  >Location</label
+                >
+                <select class="form-select" id="locationSelect">
+                  <option>Location 1</option>
+                  <option>Location 2</option>
+                  <option>Location 3</option>
+                </select>
+              </div>
+
+              <div class="form-group mb-4">
+                <label for="search" class="text-uppercase mb-1">Search</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="search"
+                  placeholder="Search"
+                />
+              </div>
+
+              <div class="form-group mb-4">
+                <label for="categorySelect" class="text-uppercase mb-1"
+                  >Category</label
+                >
+                <select class="form-select" id="categorySelect">
+                  <option>Category 1</option>
+                  <option>Category 2</option>
+                  <option>Category 3</option>
+                </select>
+              </div>
+
+              <div class="form-group mb-4">
+                <label for="categorySelect" class="text-uppercase mb-1"
+                  >Service</label
+                >
+                <select class="form-select" id="categorySelect">
+                  <option>Service 1</option>
+                  <option>Service 2</option>
+                  <option>Service 3</option>
+                </select>
+              </div>
+
+              <div class="form-group mb-5">
+                <label for="period" class="text-uppercase mb-1">Period</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="period"
+                  name="daterange"
+                  value="01/01/2018 - 01/15/2018"
+                />
+                <script>
+                  $("#period").daterangepicker({
+                    opens: "right",
+                    drops: "up",
+                  });
+                </script>
+              </div>
+
+              <button type="button" class="btn w-100">SEARCH</button>
+            </div>
+            <div class="col d-flex flex-column result-wrapper">
+              <div class="row top-filter">
+                <div class="col">
+                  <button onclick="showmap()">SHOW MAP</button>
+                </div>
+                <div class="col text-end">
+                  <button class="asc-btn">
+                    <img src="img/asc.png" />
+                  </button>
+
+                  <input
+                    type="checkbox"
+                    class="form-check-inline"
+                    id="byPrice"
+                    checked="true"
+                  />
+                  <label for="byPrice">by price</label>
+
+                  <input
+                    type="checkbox"
+                    class="form-check-inline"
+                    id="byRating"
+                  />
+                  <label for="byRating">by rating</label>
+                </div>
+              </div>
+              <div class="d-flex flex-fill results">
+                <div class="scroller">
+                  <div class="d-flex flex-wrap">
+                    <div class="person-card d-flex">
+                      <div class="row">
+                        <div
+                          class="col avatar d-flex justify-content-center align-items-center"
+                        >
+                          <img src="./img/person.png" />
+                        </div>
+                        <div
+                          class="col details d-flex flex-column justify-content-center"
+                        >
+                          <div class="name">
+                            Richard Thompson <img src="img/gold.png" />
+                          </div>
+                          <div class="address">
+                            <img src="img/pin.png" /> Vancouver, Canada
+                          </div>
+                          <div class="stack">
+                            <span class="fw-bold">Stack:</span> Python, Django,
+                            Sketch
+                          </div>
+                          <div class="rate">
+                            <span class="fw-bold"> Base Daily Rate:</span>$
+                            1,200 USD
+                          </div>
+                        </div>
+                        <div
+                          class="col d-flex justify-content-center align-items-center"
+                        >
+                          <a href="#" class="more text-decoration-none">More</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="person-card d-flex">
+                      <div class="row">
+                        <div
+                          class="col avatar d-flex justify-content-center align-items-center"
+                        >
+                          <img src="./img/person.png" />
+                        </div>
+                        <div
+                          class="col details d-flex flex-column justify-content-center"
+                        >
+                          <div class="name">
+                            Richard Thompson <img src="img/gold.png" />
+                          </div>
+                          <div class="address">
+                            <img src="img/pin.png" /> Vancouver, Canada
+                          </div>
+                          <div class="stack">
+                            <span class="fw-bold">Stack:</span> Python, Django,
+                            Sketch
+                          </div>
+                          <div class="rate">
+                            <span class="fw-bold"> Base Daily Rate:</span>$
+                            1,200 USD
+                          </div>
+                        </div>
+                        <div
+                          class="col d-flex justify-content-center align-items-center"
+                        >
+                          <a href="#" class="more text-decoration-none">More</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="person-card d-flex">
+                      <div class="row">
+                        <div
+                          class="col avatar d-flex justify-content-center align-items-center"
+                        >
+                          <img src="./img/person.png" />
+                        </div>
+                        <div
+                          class="col details d-flex flex-column justify-content-center"
+                        >
+                          <div class="name">
+                            Richard Thompson <img src="img/gold.png" />
+                          </div>
+                          <div class="address">
+                            <img src="img/pin.png" /> Vancouver, Canada
+                          </div>
+                          <div class="stack">
+                            <span class="fw-bold">Stack:</span> Python, Django,
+                            Sketch
+                          </div>
+                          <div class="rate">
+                            <span class="fw-bold"> Base Daily Rate:</span>$
+                            1,200 USD
+                          </div>
+                        </div>
+                        <div
+                          class="col d-flex justify-content-center align-items-center"
+                        >
+                          <a href="#" class="more text-decoration-none">More</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="person-card d-flex">
+                      <div class="row">
+                        <div
+                          class="col avatar d-flex justify-content-center align-items-center"
+                        >
+                          <img src="./img/person.png" />
+                        </div>
+                        <div
+                          class="col details d-flex flex-column justify-content-center"
+                        >
+                          <div class="name">
+                            Richard Thompson <img src="img/gold.png" />
+                          </div>
+                          <div class="address">
+                            <img src="img/pin.png" /> Vancouver, Canada
+                          </div>
+                          <div class="stack">
+                            <span class="fw-bold">Stack:</span> Python, Django,
+                            Sketch
+                          </div>
+                          <div class="rate">
+                            <span class="fw-bold"> Base Daily Rate:</span>$
+                            1,200 USD
+                          </div>
+                        </div>
+                        <div
+                          class="col d-flex justify-content-center align-items-center"
+                        >
+                          <a href="#" class="more text-decoration-none">More</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="person-card d-flex">
+                      <div class="row">
+                        <div
+                          class="col avatar d-flex justify-content-center align-items-center"
+                        >
+                          <img src="./img/person.png" />
+                        </div>
+                        <div
+                          class="col details d-flex flex-column justify-content-center"
+                        >
+                          <div class="name">
+                            Richard Thompson <img src="img/gold.png" />
+                          </div>
+                          <div class="address">
+                            <img src="img/pin.png" /> Vancouver, Canada
+                          </div>
+                          <div class="stack">
+                            <span class="fw-bold">Stack:</span> Python, Django,
+                            Sketch
+                          </div>
+                          <div class="rate">
+                            <span class="fw-bold"> Base Daily Rate:</span>$
+                            1,200 USD
+                          </div>
+                        </div>
+                        <div
+                          class="col d-flex justify-content-center align-items-center"
+                        >
+                          <a href="#" class="more text-decoration-none">More</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="person-card d-flex">
+                      <div class="row">
+                        <div
+                          class="col avatar d-flex justify-content-center align-items-center"
+                        >
+                          <img src="./img/person.png" />
+                        </div>
+                        <div
+                          class="col details d-flex flex-column justify-content-center"
+                        >
+                          <div class="name">
+                            Richard Thompson <img src="img/gold.png" />
+                          </div>
+                          <div class="address">
+                            <img src="img/pin.png" /> Vancouver, Canada
+                          </div>
+                          <div class="stack">
+                            <span class="fw-bold">Stack:</span> Python, Django,
+                            Sketch
+                          </div>
+                          <div class="rate">
+                            <span class="fw-bold"> Base Daily Rate:</span>$
+                            1,200 USD
+                          </div>
+                        </div>
+                        <div
+                          class="col d-flex justify-content-center align-items-center"
+                        >
+                          <a href="#" class="more text-decoration-none">More</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="person-card d-flex">
+                      <div class="row">
+                        <div
+                          class="col avatar d-flex justify-content-center align-items-center"
+                        >
+                          <img src="./img/person.png" />
+                        </div>
+                        <div
+                          class="col details d-flex flex-column justify-content-center"
+                        >
+                          <div class="name">
+                            Richard Thompson <img src="img/gold.png" />
+                          </div>
+                          <div class="address">
+                            <img src="img/pin.png" /> Vancouver, Canada
+                          </div>
+                          <div class="stack">
+                            <span class="fw-bold">Stack:</span> Python, Django,
+                            Sketch
+                          </div>
+                          <div class="rate">
+                            <span class="fw-bold"> Base Daily Rate:</span>$
+                            1,200 USD
+                          </div>
+                        </div>
+                        <div
+                          class="col d-flex justify-content-center align-items-center"
+                        >
+                          <a href="#" class="more text-decoration-none">More</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col d-flex flex-column map-wrapper d-none">
+              <div class="row top-filter">
+                <div class="col">
+                  <button onclick="showresult()">SHOW RESULT</button>
+                </div>
+              </div>
+
+              <div class="d-flex flex-fill">
+                <div id="map"></div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+    </div>
+  </body>
+
+  <script>
+    function showmap() {
+      const resultWrapper = document.querySelector(".result-wrapper");
+      const mapWrapper = document.querySelector(".map-wrapper");
+
+      resultWrapper.classList.add("d-none");
+      mapWrapper.classList.remove("d-none");
+    }
+
+    function showresult() {
+      const resultWrapper = document.querySelector(".result-wrapper");
+      const mapWrapper = document.querySelector(".map-wrapper");
+
+      mapWrapper.classList.add("d-none");
+      resultWrapper.classList.remove("d-none");
+    }
+
+    let map;
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+      });
+    }
+  </script>
+
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIwzALxUPNbatRBj3Xi1Uhp0fFzwWNBkE&callback=initMap&libraries=&v=weekly"
+    async
+  ></script>
+</html>

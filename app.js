@@ -12,17 +12,18 @@ const router = new Router();
 
 const port = process.env.PORT || 3001;
 
-nunjucks.configure('src/templates');
+nunjucks.configure('src/app/templates');
 
-const render = views(path.join(__dirname, '/src/templates'), {
-  extension: 'njk',
+const render = views(path.join(__dirname, '/src/app/templates'), {
+  extension: 'html',
   map: {
-    njk: 'nunjucks',
+    html: 'nunjucks'
   },
 });
 
 app.use(render);
-app.use(serve(path.join(__dirname, '/src/public')));
+
+app.use(serve(path.join(__dirname, '/src/app/public')));
 
 router.use('/', globalRouter.router.routes());
 
